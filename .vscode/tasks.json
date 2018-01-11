@@ -24,7 +24,7 @@
         {
             "label": "upload",
             "type": "shell",
-            "command": ".\\ci\\qshell.exe qupload .\\qiniuconfig.cfg",
+            "command": ".\\ci\\qshell.exe qupload .\\ci\\qiniuconfig_win.cfg",
             "problemMatcher": []
         }
     ]

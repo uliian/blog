@@ -7,4 +7,4 @@ script:
     - hexo deploy
     - chmod +x ./ci/qshell    
     - ./ci/qshell account $qiniuak $qiniusk
-    - ./ci/qshell qupload ./ci/qiniuconfig.cfg
+    - ./ci/qshell qupload ./ci/qiniuconfig_ci.cfg
