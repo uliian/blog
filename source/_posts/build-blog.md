@@ -163,6 +163,7 @@ public/
 ![build-blog-2018111183726](http://blog.uliian.com/resources/build-blog-2018111183726.PNG)
 并将七牛的AK/SK设置为环境变量供七牛qshell使用
 ![build-blog-2018111184233](http://blog.uliian.com/resources/build-blog-2018111184233.png)
+![build-blog-2018111185211](http://blog.uliian.com/resources/build-blog-2018111185211.png)
 
 OK~接下来可以将你的代码push到github上了，CI会自动帮你生成博客并传到七牛
 
@@ -171,3 +172,77 @@ OK~接下来可以将你的代码push到github上了，CI会自动帮你生成�
 ## 半自动发布
 
 我们可以通过vscode的Task发布，其实也就是执行deploy命令，再执行七牛qshell就好咯~
+
+1、下载七牛windows shell，并将shell放到CI文件夹下，命名为qshell.exe
+
+2、创建七牛配置：
+
+```javascript
+{
+   "src_dir"            :   ".\\public",
+   "bucket"             :   "blog",
+   "file_list"          :   "",
+   "key_prefix"         :   "",
+   "up_host"            :   "",
+   "ignore_dir"         :   false,
+   "overwrite"          :   true,
+   "check_exists"       :   false,
+   "check_hash"         :   false,
+   "check_size"         :   false,
+   "rescan_local"       :   true,
+   "skip_file_prefixes" :   "test,demo,",
+   "skip_path_prefixes" :   "hello/,temp/",
+   "skip_fixed_strings" :   ".svn,.git",
+   "skip_suffixes"      :   ".DS_Store,.exe,.cfg",
+   "log_file"           :   "upload.log",
+   "log_level"          :   "info",
+   "log_rotate"         :   1,
+   "log_stdout"         :   false,
+   "file_type"          :   0
+}
+```
+
+3、执行命令：
+
+```shell
+hexo clean
+hexo deploy
+.\\ci\\qshell.exe qupload .\\ci\\qiniuconfig_win.cfg
+```
+
+执行完毕完成上传~其实我们也可以用vscode的task帮我们做哦~我把我的task配置晒出来：
+```javascript
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "hexo server",
+            "problemMatcher": []
+        },
+        {
+            "label": "clean",
+            "type": "shell",
+            "command": "hexo clean",
+            "problemMatcher": []
+        },
+        {
+            "label": "deploy",
+            "type": "shell",
+            "command": "hexo deploy",
+            "problemMatcher": []
+        },
+        {
+            "label": "upload",
+            "type": "shell",
+            "command": ".\\ci\\qshell.exe qupload .\\ci\\qiniuconfig_win.cfg",
+            "problemMatcher": []
+        }
+    ]
+}
+```
+
+顺序执行`clean`-`deploy`-`upload`任务。完成部署~
