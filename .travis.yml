@@ -9,4 +9,4 @@ script:
     - echo $PWD
     - chmod +x ./ci/qshell    
     - ./ci/qshell account $qiniuak $qiniusk
-    - ./ci/qshell qupload ./qiniuconfig.cfg"
+    - ./ci/qshell qupload ./qiniuconfig.cfg
