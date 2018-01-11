@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "7"
+cache:
+  yarn: true
+script:
+    - hexo deploy
+    - ./ci/qshell account $qiniuak $qiniusk
+    - ./ci/qshell qupload .\\qiniuconfig.cfg"
