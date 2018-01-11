@@ -5,8 +5,6 @@ cache:
   yarn: true
 script:
     - hexo deploy
-    - ./ci/qshell
-    - echo $PWD
     - chmod +x ./ci/qshell    
     - ./ci/qshell account $qiniuak $qiniusk
     - ./ci/qshell qupload ./ci/qiniuconfig.cfg
