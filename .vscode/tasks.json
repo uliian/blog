@@ -10,6 +10,12 @@
             "problemMatcher": []
         },
         {
+            "label": "clean",
+            "type": "shell",
+            "command": "hexo clean",
+            "problemMatcher": []
+        },
+        {
             "label": "deploy",
             "type": "shell",
             "command": "hexo deploy",
