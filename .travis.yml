@@ -6,6 +6,7 @@ cache:
 script:
     - hexo deploy
     - ./ci/qshell
-    - chmod +x ./ci/qshell
+    - echo $PWD
+    - chmod +x ./ci/qshell    
     - ./ci/qshell account $qiniuak $qiniusk
     - ./ci/qshell qupload .\\qiniuconfig.cfg"
