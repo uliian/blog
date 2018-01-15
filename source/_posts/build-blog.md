@@ -1,7 +1,12 @@
 ---
 title: 如何用Hexo免费搭建自己的博客
 date: 2018-01-11 17:09:44
+categories:
+- 技术
 tags:
+- js
+- 七牛
+- hexo
 ---
 # 如何用Hexo免费搭建自己的博客
 

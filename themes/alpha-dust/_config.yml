@@ -19,7 +19,7 @@ archive_date_format: MMM YYYY
 # Comments.
 comments:
   # Disqus comments
-  disqus_shortname:
+  disqus_shortname: uliianblog
 
 # Google Analytics Tracking ID
 google_analytics:
