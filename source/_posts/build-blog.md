@@ -216,6 +216,7 @@ hexo deploy
 ```
 
 执行完毕完成上传~其实我们也可以用vscode的task帮我们做哦~我把我的task配置晒出来：
+
 ```javascript
 {
     // See https://go.microsoft.com/fwlink/?LinkId=733558

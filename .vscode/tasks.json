@@ -18,13 +18,7 @@
         {
             "label": "deploy",
             "type": "shell",
-            "command": "hexo deploy",
-            "problemMatcher": []
-        },
-        {
-            "label": "upload",
-            "type": "shell",
-            "command": ".\\ci\\qshell.exe qupload .\\ci\\qiniuconfig_win.cfg",
+            "command": "(hexo clean) ; (hexo deploy) ; (.\\ci\\qshell.exe qupload .\\ci\\qiniuconfig_win.cfg) ; (.\\ci\\qshell.exe cdnrefresh .\\ci\\refreshfile.txt)",
             "problemMatcher": []
         }
     ]
