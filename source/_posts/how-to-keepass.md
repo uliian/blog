@@ -15,7 +15,7 @@ tags:
 1、注册[坚果云](https://www.jianguoyun.com)
 
 2、查看个人信息!
-![how-to-keepass-2018122133318](http://blog.uliian.com/resources/how-to-keepass-2018122133318.png)
+![how-to-keepass-2018122135550](http://blog.uliian.com/resources/how-to-keepass-2018122135550.png)
 
 3、点击安全选项
 
