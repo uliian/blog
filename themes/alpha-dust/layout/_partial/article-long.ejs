@@ -11,7 +11,7 @@
             <% if(item.date) { %>
                 <span class="date"><%= item.date.format(config.date_format) %></span>
             <% } %>
-            <% if (theme.comments && theme.comments.disqus_shortname) { %>
+            <% if (theme.comments && theme.comments.changyan) { %>
                 <a href="#disqus_thread" class="comments"><%= __('comment') %></a>
             <% } %>
             <% if(item.categories && item.categories.first()) { %>
@@ -50,7 +50,7 @@
     <% } %>
 
     <!-- Comments -->
-    <% if (theme.comments && theme.comments.disqus_shortname) { %>
+    <% if (theme.comments) { %>
     <div class="comments">
         <%- partial("_partial/comments.ejs") %>
     </div>

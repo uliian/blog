@@ -11,8 +11,8 @@
 <%- js('js/main.js') %>
 
     <!-- Disqus Comments -->
-    <% if (theme.comments && theme.comments.disqus_shortname){ %>
-        <script type="text/javascript">
+    <% if (theme.comments && theme.comments.changyan){ %>
+        <!-- <script type="text/javascript">
             var disqus_shortname = '<%= theme.comments.disqus_shortname %>';
 
             (function() {
@@ -22,5 +22,5 @@
                 dsq.src = '//' + disqus_shortname + '.disqus.com/<% if (page.comments){ %>embed.js<% } else { %>count.js<% } %>';
                 (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
             }());
-        </script>
+        </script> -->
         <% } %>
