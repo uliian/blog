@@ -5,10 +5,10 @@ fa_logo: fa-cube
 menu:
   Home: /
   Archives: /archives
-  About: /about.html
+  About: /about
   Tags: /tags
   Categories: /categories
-  Contact: /contact.html
+  Contact: /about
 
 # Default post title
 default_post_title: Untitled
