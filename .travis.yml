@@ -8,3 +8,4 @@ script:
     - chmod +x ./ci/qshell    
     - ./ci/qshell account $qiniuak $qiniusk
     - ./ci/qshell qupload ./ci/qiniuconfig_ci.cfg
+    - ./ci/qshell cdnrefresh ./ci/refreshfile.txt
