@@ -21,7 +21,7 @@ tags:
 4、七牛客户端Qshell下载好
 
 5、Node.js安装好，并安装好Yarn
-
+<!-- more -->
 ## 创建七牛Bucket
 
 进入七牛管理后台-对象存储服务-创建Bucket。此时，你就拥有了一个静态 `Web Server`可以使用了。
