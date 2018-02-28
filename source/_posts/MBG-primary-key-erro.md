@@ -16,4 +16,4 @@ Cannot obtain primary key information from the database, generated objects may b
 
 抱着一线希望，上了Google，居然找到了[这篇博客](https://www.kunzhao.org/blog/2017/07/23/mybatis/)详细分析了这个问题的起因。还真的是 **MySQL的驱动的锅！！！** 真的是无fuck说...
 
-好吧，遇到这个问题怎么办？**将MBG使用的MySQL Driver降级至5.X版本**
+好吧，遇到这个问题怎么办？**将MBG使用的MySQL Driver降级至5.X版本** 降级了以后配置文件中的 `jdbcConnection的driverClass` 属性记得将 `com.mysql.cj.jdbc.Driver` 改回 `com.mysql.jdbc.Driver` 。
