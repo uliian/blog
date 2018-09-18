@@ -23,7 +23,7 @@ comments:
   changyan: true
 
 # Google Analytics Tracking ID
-google_analytics:
+google_analytics: UA-123911569-2
 
 # Social Accounts
 # twitter_url: https://twitter.com/?lang=en
