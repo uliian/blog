@@ -6,7 +6,7 @@ tags:
 ---
 昨天我回到家，突然发现我连上Wifi的设备都上不了网了，仔细检查后发现路由器联网失败。通过致电 `10000号` 被告知欠费，至于为什么欠费？客服小妹对我的账单进行了查询，然后义正言辞地告诉我，我办宽带时交了1900+而每个月费用200，我余额不足了！我真是一脸懵逼状！
 
-![ervery-yunying-fuck-user-201821415134](://blog.uliian.com/ervery-yunying-fuck-user-201821415134.jpg)
+![ervery-yunying-fuck-user-201821415134](//blog.uliian.com/ervery-yunying-fuck-user-201821415134.jpg)
 
 我脑子瓦特拉？办宽带套餐办10个月的？？
 <!-- more -->
@@ -24,7 +24,7 @@ tags:
 
 >您办理的套餐有一个返现计划：从7月份开始，每个月将给您50元的返现，返现到您的翼支付账户里。现在您需要将翼支付的中的余额充值到您的账户里。
 
-![ervery-yunying-fuck-user-201821911366](://blog.uliian.com/ervery-yunying-fuck-user-201821911366.jpg)
+![ervery-yunying-fuck-user-201821911366](//blog.uliian.com/ervery-yunying-fuck-user-201821911366.jpg)
 
 翼支付是个什么鬼？很明显又是一个KPI的产物，我问了一下客服MM，那我要如何操作呢？
 
@@ -46,7 +46,7 @@ tags:
 >
 >客服MM：对不起，我也不是很确定......
 
-![ervery-yunying-fuck-user-2018219114737](://blog.uliian.com/ervery-yunying-fuck-user-2018219114737.jpg)
+![ervery-yunying-fuck-user-2018219114737](//blog.uliian.com/ervery-yunying-fuck-user-2018219114737.jpg)
 
 你们不是开口必谈大数据么？数据中心一个连一个，服务器串起来够绕赤道1024圈么？怎么这么简单一个`join`都做不了？你们大数据处理用的都是`Redis`吧？！
 
@@ -69,7 +69,7 @@ tags:
 
 在我经历了N朵菊花以后，我终于在余额里看到了数字，又经历了几朵菊花的洗礼之后，完成了宽带账号的充值...
 
-整个过程充分考验了我的耐心、想象力。让用户从心底感受到了恶心。被充分恶心到的我，想到了工信部投诉，但是进入投诉站点以后我看到的是这样一番光景：![ervery-yunying-fuck-user-2018219121117](://blog.uliian.com/ervery-yunying-fuck-user-2018219121117.png)
+整个过程充分考验了我的耐心、想象力。让用户从心底感受到了恶心。被充分恶心到的我，想到了工信部投诉，但是进入投诉站点以后我看到的是这样一番光景：![ervery-yunying-fuck-user-2018219121117](//blog.uliian.com/ervery-yunying-fuck-user-2018219121117.png)
 
 原来快过年了，也要给服务器放个假了啊...很好很棒很遵守劳动法。
 
