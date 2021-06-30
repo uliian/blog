@@ -39,5 +39,11 @@ jobs:
       - name: Publish
         run: hexo deploy   
       
-      - name: check
-        run: ls
+      - name: OSS-Login
+        run: ./ci/qshell account ${{ secrets.AC }} ${{ secrets.AK }} uliian
+        
+      - name: OSS-Upload
+        run: ./ci/qshell qupload ./ci/qiniuconfig_win.cfg
+      
+      - name: RefreshCDN
+        run: ./ci/qshell cdnrefresh ./ci/refreshfile.txt
