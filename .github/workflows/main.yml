@@ -21,7 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: init
-      uses: heowc/action-hexo@main     
+      uses: heowc/action-hexo@main
+      with:
+        args: clean
     - name: clean
       run: hexo clean
     - name: Deploy
