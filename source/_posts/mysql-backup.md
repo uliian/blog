@@ -6,6 +6,8 @@ tags:
 ---
 
 记录一个简单的MySQL备份脚本：
+
+<!-- more -->
 ``` bash
 time=$(date +"%Y%m%d$H")
 echo 'begin mysql dump'
@@ -32,3 +34,54 @@ echo 'success'
 ```
 
 可以给阿里云上的目录做一个过期策略，然后就能自动删除过期文件咯，每日进行一次全备份。
+
+顺便把工具的代码发上来吧
+
+``` go
+package main
+
+import (
+	"flag"
+	"fmt"
+	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"os"
+)
+
+func main() {
+	var endPoint string
+	var accessKeyId string
+	var accessKeySecret string
+	var bucketName string
+	var filePath string
+	var remotePath string
+
+	flag.StringVar(&endPoint,"e","","阿里云EndPoint")
+	flag.StringVar(&accessKeyId,"ak","","阿里云AccessKey")
+	flag.StringVar(&accessKeySecret,"as","","阿里云AccessKeySecret")
+	flag.StringVar(&bucketName,"b","","BucketName")
+	flag.StringVar(&filePath,"f","","文件路径")
+	flag.StringVar(&remotePath,"r","","远程文件路径")
+	flag.Parse()
+
+	_, err := os.Stat(filePath)
+	if err!= nil{
+		println("文件不存在")
+		return
+	}
+
+	client, err := oss.New(endPoint, accessKeyId, accessKeySecret)
+	if err!=nil{
+		println("创建client发送错误",err)
+	}
+	bucket, err := client.Bucket(bucketName)
+	if err!=nil{
+		println("初始化bucket发送错误",err.Error())
+	}
+	err = bucket.PutObjectFromFile(remotePath, filePath)
+	if err!= nil{
+		fmt.Errorf("上传文件发生错误:%s",err.Error())
+	}
+
+}
+
+```
