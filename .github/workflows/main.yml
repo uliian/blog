@@ -21,7 +21,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: init
-      uses: heowc/action-hexo@main
-      with:
-        run: hexo clean
-
+      run: npm install
