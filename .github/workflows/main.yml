@@ -38,6 +38,9 @@ jobs:
           
       - name: Publish
         run: hexo deploy   
+
+      - name: Check
+        run: cat ./public/index.html
       
       - name: OSS-Login
         run: ./ci/qshell account ${{ secrets.AC }} ${{ secrets.AK }} uliian
