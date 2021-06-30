@@ -23,9 +23,5 @@ jobs:
     - name: init
       uses: heowc/action-hexo@main
       with:
-        args: clean
-    - name: clean
-      run: hexo clean
-    - name: Deploy
-      run: hexo deploy
+        run: hexo clean
 
