@@ -1,12 +1,4 @@
----
-title: Spring Cloud OpenFeign为什么不支持多个复杂参数生成查询字符串
-date: 2023-11-02 11:58:15
-tags:
-    - spring cloud
-    - openfeign
----
-
-在使用Spring Cloud OpenFeign时，遇到了一个很烦人的问题，就是Feign无法支持多个复杂对象作为参数生成查询字符串的场景，而这样的场景无法避免，并且短期内看不到官方有意愿解决这一问题，因此，我们研究一下为什么支持不了。
+在使用Spring Cloud OpenFeign时，遇到了一个很烦人的问题，就是Feign无法支持多个复杂对象作为参数生成查询字符串的场景，而这样的场景无法避免，并且短期内看不到官方有意愿解决这一问题，因此，我研究一下为什么支持不了。
 <!-- more -->
 
 # 多个复杂参数接收场景
@@ -27,7 +19,7 @@ public IPage<XXX> queryXXXInfo(@ModelAttribute QueryDto query ,@ModelAttribute  
 `Spring Cloud OpenFeign`针对这一场景做了一个补丁，通过引入`spring data`中的`spring-data-commons`组件，引入`Pageable`接口用以支持分页场景。
 
 # 现有方案的问题
-这一方案适应范围极端狭窄，仅仅增加了分页场景支持，并且需要分页参数实现`Pageable`接口。如果需要增加其他复杂类型则该方案完全无法支持。另外，如果使用`Pageable`接口添加分页相关参数，需要着重注意：page参数 ***不能*** 放在前方并加上`@SpringQueryMap`注解。否则将和原有规则下表现一致，只会将分页参数进行编码。
+但是这一方案适应范围极端狭窄，仅仅增加了分页场景支持，并且需要分页参数实现`Pageable`接口。如果需要增加其他复杂类型则该方案完全无法支持。另外，如果使用`Pageable`接口添加分页相关参数，需要着重注意：page参数 **不能** 放在前方并加上`@SpringQueryMap`注解。否则只会将分页参数进行编码。
 
 # 解决方案
 通过查看`Spring Cloud OpenFeign`相关代码，在以下文件中找到了`Pageable`相关实现
@@ -97,19 +89,28 @@ final class RequestTemplateFactoryResolver{
 
 为了解决这一问题，Spring Cloud引入了`Pageable`进行参数传递，但是这一方式带来了几个显而易见的问题：
 
-1、本质上来说，它占用了Body的位置，当然，你可以说需要分页查询的都应该用GET请求，GET请求是不应该body的。但是如果我用的真就是POST怎么办？所有API都用POST的团队不要太多哦，很多人还当作了最佳实践。
+1、本质上来说，它占用了Body的位置，当然，你可以说需要分页查询的都应该用GET请求，GET请求是不应该有body的。但是如果我用的使用就是POST，并且POST请求里既有复杂查询字符串又有body怎么办？所有API都用POST的团队不要太多哦，很多人还当作了最佳实践。
 
 2、其表现与Spring MVC不同，尤其是使用了Spring MVC协定的开发而言，带来了无穷无尽的困惑。
 
-3、`@SpringQueryMap`注解的实现让人困惑，我上文说到，这个注解不能打在`Pageable`参数上，如果你将`Pageable`参数放在前面，并且打上了这个注解，它会占用另外参数的index，造成另外参数无法被序列化为QueryString，而这个限定描述我没找到，并且很反直觉，至少我看到这个注解我的第一反应就是所有需要序列化的参数都打上挺好。
+3、`@SpringQueryMap`注解的实现让人困惑，我上文说到，这个注解不能打在`Pageable`参数上，如果你将`Pageable`参数放在前面，并且打上了这个注解，它会占用另外参数的index，造成另外参数无法被序列化为QueryString，而这个限制的描述在文档中我没找到，并且很反直觉，至少我看到这个注解我的第一反应就是所有需要序列化的参数都打上。
 
-4、我真的不想用`Spring data`的`Pageable`啊，我有我自己团队管用的Page参数定义啊~
+4、我真的不想用`Spring data`的`Pageable`啊，我有我自己团队约定的Page参数定义啊~
 
 ## Feign的扩展性问题
 
 我个人其实很喜欢Feign这个库，当年第一次接触到就让我感到眼前一亮。优雅清晰的HTTP调用构造，让我一眼就爱上了他。但是在长期的使用过程中，Feign的扩展性问题却多次影响到了我。
 
-上一次是在进行响应Decode时我期望获取到方法元数据，但是无法获取`MethodMetadata`，我当时的需求是，在对接一个三方API时，它返回了一个层级很深的JSON，但是我只需要其中很少的一点点信息，我希望在定义方法时，同时定义一个JSONPATH，可惜当时我实在找不到去哪里能够取到我这个JSONPATH。
+上一次映像深刻的是在进行响应Decode时我期望获取到方法元数据，但是无法获取`MethodMetadata`。我当时的需求是，在对接一个三方API时，它返回了一个层级很深的JSON，但是我只需要其中很少的一点点信息，我希望在定义方法时，同时通过自定义注解定义一个JSONPATH，可惜当时我实在找不到在哪里能够取到我这个自定义注解及JSONPATH。
+
+我那时一度想扩展Decode的上层方法，将MetaData存储在`ThreadLocal`中也行，然后就找到了
+```java
+
+final class SynchronousMethodHandler implements MethodHandler {
+    ...
+}
+```
+真的..哪哪都是`final`。
 
 一直到2019年12月22日才终于在
 
@@ -121,19 +122,10 @@ public Object decode(final Response response, Type type) throws IOException, Fei
 
 ```
 
-如此深的地方将`MethodMetadata`暴露出来。至截稿日期（2023年11月27日），该属性还有`@Experimental`注解，姑且认为OpenFeign团队的实验很是严谨。
-
-我那时一度想扩展Decode的上层方法，将MetaData存储在`ThreadLocal`中也行，然后就找到了
-```java
-
-final class SynchronousMethodHandler implements MethodHandler {
-    ...
-}
-```
-真的..哪哪都是`final`。
+如此深渊般的地方将`MethodMetadata`暴露出来。至截稿日期（2023年11月27日），该属性还有`@Experimental`注解，姑且认为OpenFeign团队的实验很严谨吧。
 
 # 总结
-至截稿日期为止（2023年11月27日）我只能分析出为什么Feign无法支持多个复杂参数解析为查询字符串的原因，实在是**无法很好地解决这个问题**。但是如果你真的遇到这个需求，又实在很想解决的漂亮那么一丢丢，那么我给你两个也不咋样的方案：
+至截稿日期为止（2023年11月27日）我只能分析出为什么Feign无法支持将多个复杂参数解析为查询字符串的原因，实在是**无法提供很好的解决方案用以解决这个问题**。但是如果你真的遇到这个需求，又实在很想解决的漂亮那么一丢丢，那么我给你两个也不咋样的方案：
 
 1、使用Map传参吧，想怎么传就怎么传，学习PHP大法。
 
