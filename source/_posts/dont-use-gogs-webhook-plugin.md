@@ -34,3 +34,5 @@ tags:
 其次，它能通过Http Body（JSON/xml）中所携带的内容通过`JsonPath`、`XPath`来获取webhook中携带的各种变量，也能通过Form body所携带的内容通过指定KEY使用，还能获取http header中的内容及url查询字符串中的内容，这些获取到的信息都能定义环境变量供后续构建使用。
 而且该项目使用者多，更新活跃，Github上也能看到频繁的commit。
 同时，他不依赖于gogs，任何能够进行webhook调用的工具都能使用，给后续提供了较大的想象空间，适应性更强。
+
+所以`Generic Webhook Trigger`,你值得拥有
