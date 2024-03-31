@@ -1,3 +1,11 @@
+---
+title: Spring Cloud OpenFeign为什么不支持多个复杂参数生成查询字符串
+date: 2018-03-03 08:53:47
+tags:
+    - Spring Cloud OpenFeign
+
+---
+
 在使用Spring Cloud OpenFeign时，遇到了一个很烦人的问题，就是Feign无法支持多个复杂对象作为参数生成查询字符串的场景，而这样的场景无法避免，并且短期内看不到官方有意愿解决这一问题，因此，我研究一下为什么支持不了。
 <!-- more -->
 
